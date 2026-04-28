@@ -3,7 +3,7 @@ import { ReflectionUI } from './ui.js';
 
 async function init() {
     try {
-        const response = await fetch(`${import.meta.env.BASE_URL}reflection-tree.json`);
+        const response = await fetch(`${import.meta.env.BASE_URL}reflection-tree.json?v=${Date.now()}`);
         const treeData = await response.json();
         
         const engine = new ReflectionEngine(treeData);
