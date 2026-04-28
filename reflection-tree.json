@@ -1,0 +1,283 @@
+[
+  {
+    "id": "START",
+    "parentId": null,
+    "type": "start",
+    "text": "Good evening. Let's look at your day.",
+    "options": [],
+    "target": "A1_OPEN"
+  },
+  {
+    "id": "A1_OPEN",
+    "parentId": "START",
+    "type": "question",
+    "text": "If today were a weather report, what would it be?",
+    "options": [
+      "Sunny",
+      "Cloudy",
+      "Stormy",
+      "Mixed"
+    ]
+  },
+  {
+    "id": "A1_D1",
+    "parentId": "A1_OPEN",
+    "type": "decision",
+    "options": [
+      "Sunny|Mixed:A1_Q_AGENCY",
+      "Cloudy|Stormy:A1_Q_CHALLENGE"
+    ]
+  },
+  {
+    "id": "A1_Q_AGENCY",
+    "parentId": "A1_D1",
+    "type": "question",
+    "text": "You said '{A1_OPEN.answer}'. When things went well today, what made it happen?",
+    "options": [
+      "I was prepared",
+      "I adapted on the fly",
+      "The team came through",
+      "I got lucky"
+    ]
+  },
+  {
+    "id": "A1_Q_CHALLENGE",
+    "parentId": "A1_D1",
+    "type": "question",
+    "text": "You said '{A1_OPEN.answer}'. What was your first instinct when things got hard?",
+    "options": [
+      "Figure out what I could control",
+      "Push through alone",
+      "Wait for someone to step in",
+      "Feel stuck"
+    ]
+  },
+  {
+    "id": "A1_D2",
+    "parentId": "A1_Q_AGENCY",
+    "type": "decision",
+    "options": [
+      "I was prepared|I adapted on the fly:A1_Q_CHOICE_INT",
+      "The team came through|I got lucky:A1_Q_CHOICE_EXT"
+    ]
+  },
+  {
+    "id": "A1_D2B",
+    "parentId": "A1_Q_CHALLENGE",
+    "type": "decision",
+    "options": [
+      "Figure out what I could control:A1_Q_CHOICE_INT",
+      "Push through alone:A1_Q_CHOICE_MIXED",
+      "Wait for someone to step in|Feel stuck:A1_Q_CHOICE_EXT"
+    ]
+  },
+  {
+    "id": "A1_Q_CHOICE_INT",
+    "parentId": "A1_D2",
+    "type": "question",
+    "text": "You recognized your agency. What kind of choice did you make?",
+    "options": [
+      "Changed my approach",
+      "Asked for help",
+      "Stayed focused",
+      "Said no to something"
+    ],
+    "signal": "axis1:internal"
+  },
+  {
+    "id": "A1_Q_CHOICE_EXT",
+    "parentId": "A1_D2",
+    "type": "question",
+    "text": "Can you find one small choice you *did* make, even if things felt out of control?",
+    "options": [
+      "I chose how I reacted",
+      "I chose who to talk to",
+      "I chose to keep going",
+      "I'm not sure"
+    ]
+  },
+  {
+    "id": "A1_Q_CHOICE_MIXED",
+    "parentId": "A1_D2B",
+    "type": "question",
+    "text": "You pushed through. Was that a conscious choice or automatic?",
+    "options": [
+      "Conscious choice",
+      "Just instinct",
+      "Didn't think about it",
+      "Not sure"
+    ]
+  },
+  {
+    "id": "A1_D3",
+    "parentId": "A1_Q_CHOICE_EXT",
+    "type": "decision",
+    "options": [
+      "I chose how I reacted|I chose who to talk to|I chose to keep going:A1_R_EMERGING",
+      "I'm not sure:A1_R_EXTERNAL"
+    ]
+  },
+  {
+    "id": "A1_R_INTERNAL",
+    "parentId": "A1_Q_CHOICE_INT",
+    "type": "reflection",
+    "text": "You said '{A1_OPEN.answer}', but your actions show control. You were not just reacting — you were choosing.",
+    "target": "BRIDGE_1_2"
+  },
+  {
+    "id": "A1_R_EMERGING",
+    "parentId": "A1_D3",
+    "type": "reflection",
+    "text": "Even on a '{A1_OPEN.answer}' day, you found a choice. That's where agency begins.",
+    "target": "BRIDGE_1_2"
+  },
+  {
+    "id": "A1_R_EXTERNAL",
+    "parentId": "A1_D3",
+    "type": "reflection",
+    "text": "It felt outside your control today. Tomorrow, try to notice just one moment where you made a choice.",
+    "target": "BRIDGE_1_2"
+  },
+  {
+    "id": "BRIDGE_1_2",
+    "parentId": "A1_R_INTERNAL",
+    "type": "bridge",
+    "text": "You noticed where you had control. Now the question is — where did you use that control for others?",
+    "target": "A2_OPEN"
+  },
+  {
+    "id": "A2_OPEN",
+    "parentId": "BRIDGE_1_2",
+    "type": "question",
+    "text": "Think about one interaction today. What stands out?",
+    "options": [
+      "I helped someone",
+      "I went the extra mile",
+      "I felt unrecognized",
+      "Others were slacking"
+    ]
+  },
+  {
+    "id": "A2_D1",
+    "parentId": "A2_OPEN",
+    "type": "decision",
+    "options": [
+      "I helped someone|I went the extra mile:A2_Q_GIVE",
+      "I felt unrecognized|Others were slacking:A2_Q_EXPECT"
+    ]
+  },
+  {
+    "id": "A2_Q_GIVE",
+    "parentId": "A2_D1",
+    "type": "question",
+    "text": "What did you contribute?",
+    "options": [
+      "Helped a teammate",
+      "Taught someone",
+      "Took extra responsibility",
+      "Gave useful feedback"
+    ],
+    "signal": "axis2:contribution"
+  },
+  {
+    "id": "A2_Q_EXPECT",
+    "parentId": "A2_D1",
+    "type": "question",
+    "text": "What were you hoping for?",
+    "options": [
+      "Recognition",
+      "Fairness",
+      "Support from others",
+      "Acknowledgment"
+    ],
+    "signal": "axis2:entitlement"
+  },
+  {
+    "id": "A2_R_CONTRIBUTION",
+    "parentId": "A2_Q_GIVE",
+    "type": "reflection",
+    "text": "You contributed without needing immediate return. That’s how strong teams are built.",
+    "target": "BRIDGE_2_3"
+  },
+  {
+    "id": "A2_R_ENTITLEMENT",
+    "parentId": "A2_Q_EXPECT",
+    "type": "reflection",
+    "text": "That need is real. The question is — can you create that value, instead of waiting for it?",
+    "target": "BRIDGE_2_3"
+  },
+  {
+    "id": "BRIDGE_2_3",
+    "parentId": "A2_R_CONTRIBUTION",
+    "type": "bridge",
+    "text": "You acted or expected something. Now zoom out — who else was part of your day?",
+    "target": "A3_OPEN"
+  },
+  {
+    "id": "A3_OPEN",
+    "parentId": "BRIDGE_2_3",
+    "type": "question",
+    "text": "Thinking of your biggest challenge, who comes to mind?",
+    "options": [
+      "Just me",
+      "My team",
+      "A colleague",
+      "The end user"
+    ]
+  },
+  {
+    "id": "A3_D1",
+    "parentId": "A3_OPEN",
+    "type": "decision",
+    "options": [
+      "Just me:A3_Q_SELF",
+      "My team|A colleague|The end user:A3_Q_OTHER"
+    ]
+  },
+  {
+    "id": "A3_Q_SELF",
+    "parentId": "A3_D1",
+    "type": "question",
+    "text": "Was anyone else affected by this?",
+    "options": [
+      "Yes, my team",
+      "Someone depends on me",
+      "No",
+      "Not sure"
+    ],
+    "signal": "axis3:selfcentric"
+  },
+  {
+    "id": "A3_Q_OTHER",
+    "parentId": "A3_D1",
+    "type": "question",
+    "text": "What did thinking beyond yourself feel like?",
+    "options": [
+      "Gave meaning",
+      "Added pressure",
+      "Felt natural",
+      "Felt new"
+    ],
+    "signal": "axis3:altrocentric"
+  },
+  {
+    "id": "A3_R",
+    "parentId": "A3_Q_OTHER",
+    "type": "reflection",
+    "text": "You looked beyond yourself. That’s where meaning grows.",
+    "target": "SUMMARY"
+  },
+  {
+    "id": "SUMMARY",
+    "parentId": "A3_R",
+    "type": "summary",
+    "text": "You started the day as '{A1_OPEN.answer}'. But your actions show {axis1.dominant} agency, {axis2.dominant} contribution, and {axis3.dominant} awareness of others.",
+    "target": "END"
+  },
+  {
+    "id": "END",
+    "parentId": "SUMMARY",
+    "type": "end",
+    "text": "See you tomorrow. Rest well."
+  }
+]
