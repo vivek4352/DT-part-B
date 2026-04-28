@@ -106,7 +106,8 @@
       "Just instinct",
       "Didn't think about it",
       "Not sure"
-    ]
+    ],
+    "target": "A1_R_EMERGING"
   },
   {
     "id": "A1_D3",
@@ -245,7 +246,8 @@
       "No",
       "Not sure"
     ],
-    "signal": "axis3:selfcentric"
+    "signal": "axis3:selfcentric",
+    "target": "SUMMARY"
   },
   {
     "id": "A3_Q_OTHER",

@@ -70,11 +70,7 @@ export class ReflectionEngine {
         if (children.length === 1) {
             this.moveTo(children[0].id);
         } else {
-            if (this.currentNodeId === 'A3_Q_SELF') {
-                this.moveTo('SUMMARY');
-            } else {
-                console.error("Stuck at node:", this.currentNodeId);
-            }
+            console.error("Stuck at node:", this.currentNodeId);
         }
     }
 
